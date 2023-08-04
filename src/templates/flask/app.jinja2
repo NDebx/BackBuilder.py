@@ -1,0 +1,28 @@
+from flask import Flask
+from config import Config
+
+# Creating a flask application based on the application factory pattern
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    app.config.from_object(config_class)
+
+    # Apply here configuration before starting the webserver
+    with app.app_context():
+        pass
+
+    # Initialize extensions below this comment
+    
+    # Register blueprints below this comment
+    blueprint_name = []
+    for name in blueprint_name:
+        app.register_blueprint(name)
+
+    return app
+
+
+app = create_app()
+
+if __name__ == "__main__":
+    
+    # Turn debug off in production please, because this is a development server! 
+    app.run(debug=True, port={{ flask_host_port }})

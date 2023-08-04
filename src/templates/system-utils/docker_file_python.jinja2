@@ -1,0 +1,34 @@
+{% if app_type == "flask" %}
+
+# Use an official Python runtime as a parent image
+FROM python:latest
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the requirements file into the container at /app
+COPY ./requirements.txt /app/requirements.txt
+
+# Install the dependencies
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+
+# Copy the Flask application code into the container at /app
+COPY ./{{ project_name }} /app/{{ project_name }}
+
+# Expose port {{ flask_host_port }} for Gunicorn
+EXPOSE {{ flask_host_port }}
+
+# Start Gunicorn with 4 worker processes over HTTP
+CMD gunicorn --bind 0.0.0.0:{{ flask_host_port }} --workers 4 {{ project_name }}:app
+
+{% elif app_type == "fastapi" %}
+
+# Add the FastAPI-specific instructions here
+# (This part is left blank since it's missing in your provided template)
+
+{% else %}
+
+# Add the default instructions here
+# (This part is left blank since it's missing in your provided template)
+
+{% endif %}

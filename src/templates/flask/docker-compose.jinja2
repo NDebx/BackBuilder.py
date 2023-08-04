@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  {{ project_name }}:
+    build: .
+    ports:
+      - "{{ flask_host_port }}:{{ flask_host_port }}"

@@ -1,0 +1,20 @@
+from datetime import timedelta
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+# For now the flask configuration, we have built out-of-the-box JWT configuration but you are free to add your own config
+class Config:
+
+    # Load the key via environment variables
+    JWT_SECRET_KEY = os.environ["JWT_SECRET_KEY"]
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=1)
+    JWT_TOKEN_LOCATION = ["headers", "cookies", "json", "query_string"]
+    JWT_COOKIE_SECURE = True
+    JWT_COOKIE_CSRF_PROTECT = True
+    JWT_ACCESS_COOKIE_NAME = "access_token"
+    JWT_SESSION_COOKIE = True
+    JWT_VERIFY_EXPIRATION = True
+    JWT_BLACKLIST_ENABLED = True
+    JWT_BLACKLIST_TOKEN_CHECKS = ['access']
